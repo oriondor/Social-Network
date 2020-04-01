@@ -21,11 +21,8 @@ from api import api_bpt
 
 app = Flask(__name__)
 app.config['MONGO_URI'] = config.mongo_uri
-app.config["SESSION_PERMANENT"] = False
-app.config["SESSION_TYPE"] = "filesystem"
 app.config['JSON_SORT_KEYS'] = False
 app.config['TEMPLATES_AUTO_RELOAD'] = True
-Session(app)
 mongo.init_app(app)
 app.config['JWT_SECRET_KEY'] = 'thisisthesercetkey'  
 app.config['JWT_TOKEN_LOCATION'] = ['cookies']
