@@ -67,12 +67,13 @@ def new_post():
 	if current_user and request.method=="POST":
 		if request.form.get('add_post'):
 			text = request.form.get('new_text')
-			filename = [0,0,0]
+			filename = [0,0,'0']
 			if 'new_photo' in request.files:
 				file = request.files['new_photo']
-				filename = file.filename.split('.')
-				filename.append(f"{filename[0]}-{randomString(5)}.{filename[1]}")
-				file_id = mongo.save_file(filename[2],file)
+				if file.filename!='':
+					filename = file.filename.split('.')
+					filename.append(f"{filename[0]}-{randomString(5)}.{filename[1]}")
+					file_id = mongo.save_file(filename[2],file)
 			print(filename)
 			date_now = datetime.datetime.now()
 			likes={}
