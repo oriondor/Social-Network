@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block header %}
+<h3>
+{% block title %}
+Профиль
+{% endblock %}
+</h3>
+{% endblock %}
+
+{% block content %}
+{% if user_info %}
+	{% for error in errors %}
+	<div class="alert alert-danger" role="alert">
+	  {{error}}
+	</div>
+	{% endfor %}
+	<div id="profile">
+		<div id='username'>{{profile_data['username']}}</div>
+		<div id='profile-photo'><img src="{{url_for('file', filename=profile_data['photo_name'])}}"></div>
+		{% if profile_data['username']==user_info %}
+		<form method="POST" enctype="multipart/form-data">
+			<h5>Загрузить новое фото</h5>
+			<div class="custom-file mb-3">
+			    <input type="file" class="custom-file-input" id="customFile" name="new_profile_photo">
+			    <label class="custom-file-label" for="customFile">Новое фото профиля</label>
+		    </div>
+			<input type="hidden" name="profile_upload_photo" value="yep">
+			<button type="submit" class="btn btn-primary btn-lg btn-block">Загрузить</button>
+		</form>
+		<br>
+		<hr>
+		<br>
+		<a href="{{url_for('auth.logout')}}"><button type="submit" class="btn btn-danger btn-lg btn-block">Выйти</button></a>
+		{% endif %}
+	</div>
+
+{% endif %}
+{% endblock %}
+

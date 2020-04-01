@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block header %}
+<h3>
+{% block title %}
+Главная
+{% endblock %}
+</h3>
+{% endblock %}
+
+{% block content %}
+{% if user_info %}
+<button type="button" data-toggle="modal" data-target="#addNewPostModal" class="btn btn-outline-secondary btn-lg btn-block">&#65291;  Новый пост</button>
+{% else %}
+<h5>Войдите, чтобы оставлять лайки и публиковать посты</h5>
+{% endif %}
+<div id="posts">
+		
+	</div>
+
+
+<div class="modal fade" id="addNewPostModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="addNewPostModalLabel">Новый пост</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form method="POST" action="{{url_for('new_post')}}" enctype="multipart/form-data">
+			<textarea class="form-control" name="new_text" required></textarea>
+			<div class="custom-file mb-3">
+			    <input type="file" class="custom-file-input" id="customFile" name="new_photo">
+			    <label class="custom-file-label" for="customFile">Фото</label>
+		    </div>
+	  		<input type="hidden" name="add_post" value="yep">
+	  		<button type="submit" class="btn btn-primary btn-lg btn-block">Опубликовать</button>
+		</form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+

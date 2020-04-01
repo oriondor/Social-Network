@@ -1,0 +1,11 @@
+#username{
+	font-size:180%;
+}
+#profile-photo img{
+	max-width: 200px;
+}
+.profile-photo-small img{
+	width: 50px;
+	height: 50px;
+	border-radius: 50%;
+}

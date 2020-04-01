@@ -1,0 +1,51 @@
+
+<!DOCTYPE html>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script>
+// Add the following code if you want the name of the file appear on select
+$(document).on("change", ".custom-file-input",  function() {
+  var fileName = $(this).val().split("\\").pop();
+  $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+});
+</script>
+
+<title>Social network:{% block title %}{% endblock %}</title>
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='navigation.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='profile.css') }}">
+
+<script type="text/javascript" src="{{ url_for('static', filename='js/getQueryVariable.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='js/responsive.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='js/load.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='js/delete.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='js/like.js') }}"></script>
+
+<section class="content">
+<header>
+{% block header %}
+{% endblock %}
+<nav class="topnav" id="myTopnav">
+  {% if user_info %}
+  <a class="nav-link active" href="{{ url_for('home') }}">Главная</a>
+  <ul class='navbar-nav ml-auto'>
+    <li><a class='nav-link' href="{{url_for('profile_bpt.profile',username=user_info)}}"><div class='profile-photo-small very-small ml-auto text-corrections'><img src="{{url_for('profile_bpt.current_user_photo', username=user_info)}}">  {{user_info}}</div></a></li>
+  </ul>
+  <a href="javascript:void(0);" class="icon" onclick="responsive()">
+    <i class="fa fa-bars"></i>
+  </a>
+  {% else %}
+  <a class="nav-link" href="{{ url_for('auth.login') }}">Войти на сайт</a>
+  {% endif %}
+</nav>
+</header>
+<br>
+{% block content %}
+{% endblock %}
+</section>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>

@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block header %}
+<h3>
+{% block title %}
+Вход
+{% endblock %}
+</h3>
+{% endblock %}
+
+{% block content %}
+{% for error in errors %}
+<div class="alert alert-danger" role="alert">
+  {{error}}
+</div>
+{% endfor %}
+<form method="POST">
+	<div class="input-group input-group-lg">
+	  <input type='text' name="username" placeholder="Имя пользователя" class="form-control" aria-label="Large" aria-describedby="inputGroup-sizing-sm">
+	</div>
+	<div class="input-group input-group-lg">
+	  <input type='password' name="password" placeholder="Пароль" class="form-control" aria-label="Large" aria-describedby="inputGroup-sizing-sm">
+	</div>
+	<button type="submit" class="btn btn-primary btn-lg btn-block">Войти</button>
+	<a href="{{url_for('auth.register')}}"><button type="button" class="btn btn-success btn-lg btn-block">Нет аккаунта?</button></a>
+
+</form>
+ 
+{% endblock %}
+

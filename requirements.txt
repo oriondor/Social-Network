@@ -1,0 +1,5 @@
+flask
+Flask-PyMongo
+flask-jwt-extended
+Pillow
+werkzeug==0.16.0

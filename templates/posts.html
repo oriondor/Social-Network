@@ -1,0 +1,33 @@
+{% for post in posts %}
+			<div class="post">
+				<div class='post_header'>
+					<div class='profile-photo-small'><img src="{{url_for('profile_bpt.current_user_photo', username=post['author'])}}"></div>
+					<div class="post_author">
+					<a href="{{url_for('profile_bpt.profile', username=post['author'])}}">{{post['author']}}</a>
+					</div>
+					{% if user_info and user_info==post['author'] %}
+					<div class="btn-group dropleft" role="group">
+					    <button id="post_settings" type="button" class="btn btn-light dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					      ...
+					    </button>
+						<div class="dropdown-menu" aria-labelledby="post_settings">
+					      <a class="dropdown-item" ident="{{post['_id']}}" onclick="deletePost(this)" href="#">Удалить пост</a>
+					    </div>
+					</div>
+					{% endif %}
+				</div>
+				{% if post['photo_name']!='0' %}
+				<div class="post-photo"><img src="{{url_for('file',filename=post['photo_name'])}}"></div>
+				{% endif %}
+				{% if user_info %}
+					{% if user_id|string in post['likes_list'].keys() %}
+					<button type="button" ident='{{post["_id"]}}|{{user_id}}' onclick="like(this)" class="btn post-like btn-info btn-lg btn-block">&#10084; {{post['likes']}}</button>
+					{% else %}
+					<button type="button" ident='{{post["_id"]}}|{{user_id}}' onclick="like(this)" class="btn post-like btn-outline-info btn-lg btn-block">&#10084; {{post['likes']}}</button>
+					{% endif %}
+				{% else %}
+				<button type="button" class="btn post-like btn-secondary btn-lg btn-block" disabled>&#10084;{{post['likes']}}</button>
+				{% endif %}				
+				<div class="post-text"><a href="{{url_for('profile_bpt.profile', username=post['author'])}}">{{post['author']}}</a> {{post['text']}}</div>
+			</div>
+		{% endfor %}

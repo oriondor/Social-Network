@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block header %}
+<h3>
+{% block title %}
+Вход
+{% endblock %}
+</h3>
+{% endblock %}
+
+{% block content %}
+{% for error in errors %}
+<div class="alert alert-danger" role="alert">
+  {{error}}
+</div>
+{% endfor %}
+	<form method="POST"  enctype="multipart/form-data">
+		<h3>Загрузка изображения, которое будет стандартным при регистрации нового пользователя</h3>
+			<div class="custom-file mb-3">
+			    <input type="file" class="custom-file-input" id="customFile" name="new_standart_user_photo">
+			    <label class="custom-file-label" for="customFile">Новое стандартное фото</label>
+		    </div>
+	  		<button type="submit" class="btn btn-primary btn-lg btn-block">Загрузить</button>
+	</form>
+ 
+{% endblock %}
+
