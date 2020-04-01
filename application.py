@@ -1,6 +1,5 @@
-from flask import Flask, session, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for
 import datetime
-from flask_session import Session
 from database import mongo
 from jwt_ext import jwt
 from bson.objectid import ObjectId
